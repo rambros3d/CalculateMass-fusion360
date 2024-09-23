@@ -1,4 +1,20 @@
-# File: calculate_mass_for_multiple_materials.py
+ 
+# Rambrosteam - rambros3d.com
+# 
+# This script is licensed under the Public Domain. 
+#
+# File: CalculateMass.py
+#
+# This script was created to calculate the mass of a body
+# in metric and imperial units automatically.
+#
+# The preset densities for the materials are:
+# Steel: 7800 kg/m³
+# Aluminum: 2700 kg/m³
+# ABS: 1020 kg/m³
+#
+# This script was used in the 3DCAD esports TOURNAMENT
+# https://youtu.be/5SBDwwzF7B0?t=4718
 
 import adsk.core, adsk.fusion, adsk.cam, traceback
 
