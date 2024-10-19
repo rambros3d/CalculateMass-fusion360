@@ -41,8 +41,8 @@ def calculate_mass_of_body(body):
 def calculate_mass_with_preset_densities(bodies, is_metric):
     """Calculate total mass of bodies using preset material densities."""
     total_volumes = {
-        "Steel": 0.0,
-        "Aluminum": 0.0,
+        "Plain Carbon Steel": 0.0,
+        "Alum Alloy": 0.0,
         "ABS": 0.0
     }
 
@@ -54,8 +54,8 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
 
     output_message = ""
     materials = {
-        "Steel": 7800,
-        "Aluminum": 2700,
+        "Plain Carbon Steel": 7800,
+        "Alum Alloy": 2700,
         "ABS": 1020
     }
 
@@ -64,15 +64,15 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
         if is_metric:
             total_mass_g = total_mass_kg * 1000  # Convert kg to grams
             output_message += (
-                f"{material}:\n"
-                f"  {total_mass_g:.4f} g\n"
-                f"  {total_mass_kg:.4f} kg\n\n"
+                f"{material}:\n\n"
+                f"  {total_mass_g:.4f} g\n\n"
+                f"  {total_mass_kg:.4f} kg\n\n\n"
             )
         else:
             total_mass_lb = total_mass_kg * 2.20462  # Convert kg to pounds
             output_message += (
-                f"{material}:\n"
-                f"  {total_mass_lb:.4f} lb\n\n"
+                f"{material}:\n\n"
+                f"  {total_mass_lb:.4f} lb\n\n\n"
             )
     return output_message
 
@@ -138,7 +138,7 @@ def run(context):
                     return
 
         # If no body or component selected, calculate total mass of all bodies
-        output_message += "Total Mass of All Bodies:\n\n"
+        output_message += "Total Mass of All Bodies:\n\n\n"
         output_message += calculate_mass_with_preset_densities(solid_bodies, is_metric)
 
         # If multiple bodies with different material densities, calculate from material properties
