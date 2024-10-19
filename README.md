@@ -44,9 +44,9 @@ After winning the championship, I have **unified all the required features** alo
 - **ABS**: 1020 kg/m³
 
 ### Installation
-1. Download & unzip file [CalculateMass-fusion360.zip](https://github.com/rambros3d/CalculateMass-fusion360.git).
+1. Download & unzip file [CalculateMass-fusion360.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
 2. Open Fusion 360 and open **Scripts and Add-Ins**.
-3. Navigate to CalculateMass-fusion360 -> **CalculateMass_ultimate**
+3. Navigate to **CalculateMass_ultimate** folder
 4. Add the script and run it from the **Scripts** menu.
 
 #### License
