@@ -4,7 +4,7 @@
 
 ![RamBros3D-TooTallToby-MassCalculate](Rambros-TooTallToby-MassCalculate-Ultimate.jpg)
 
-Every year, [TooTallToby & Team](https://www.toottalltoby.com/) host the **WORLD CHAMPIONSHIP OF 3D CAD SPEEDMODELING**.
+Every year, [TooTallToby & Team](https://www.tootalltoby.com/) host the **WORLD CHAMPIONSHIP OF 3D CAD SPEEDMODELING**.
 The 2024 edition was a 16-person 1 vs 1 bracket-style tournament. Checkout TooTallToby's [YouTube channel](https://www.youtube.com/@TooTallToby) for more nail biting tournaments.
 Huge kudos to Toby for making CAD a new type of esport; it is fun and enjoyable!
 
