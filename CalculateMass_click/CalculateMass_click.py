@@ -76,8 +76,8 @@ def run(context):
                 # Append results in metric units
                 output_message += (
                     f"{material}:\n\n"
-                    f"  {mass_g:.4f} g\n\n"
-                    f"  {mass_kg:.4f} kg\n\n\n"
+                    f"  {mass_g:.8f} g\n\n"
+                    f"  {mass_kg:.8f} kg\n\n\n"
                 )
             else:
                 # Convert mass to pounds and ounces
@@ -86,7 +86,7 @@ def run(context):
                 # Append results in imperial units
                 output_message += (
                     f"{material}:\n\n"
-                    f"  {mass_lb:.4f} lb\n\n\n"
+                    f"  {mass_lb:.8f} lb\n\n\n"
                 )
 
         # Display the results
