@@ -10,7 +10,7 @@ Huge kudos to Toby for making CAD a new type of esport; it is fun and enjoyable!
 
 I got to know about TooTallToby from [TeachingTech's Video](https://youtu.be/vGiJLhZ6gIY) in July 2024.
 
-This script was used throught this tournament:
+This script was used throughout this tournament:
 - [First round](https://youtu.be/5SBDwwzF7B0?t=4938) RamBros vs Ty - September 20, 2024
 - [Second round](https://youtu.be/WHVznU5a2hA?t=4873) RamBros vs AceSvaba - October 4, 2024
 - [Third round](https://youtu.be/_7c9lpb-9rE?t=6359) RamBros vs Dom - October 18, 2024
@@ -44,7 +44,7 @@ After winning the championship, I have **unified all the required features** alo
 - **ABS**: 1020 kg/m³
 
 ### Installation
-1. Download & unzip file [CalculateMass-fusion360.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
+1. Download & unzip file [CalculateMass_ultimate.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
 2. Open Fusion 360 and open **Scripts and Add-Ins**.
 3. Navigate to **CalculateMass_ultimate** folder
 4. Add the script and run it from the **Scripts** menu.
