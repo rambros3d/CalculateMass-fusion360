@@ -101,7 +101,7 @@ def run(context):
         default_units = units_mgr.defaultLengthUnits
         is_metric = default_units in ['cm', 'mm', 'm']
 
-        output_message = f"RamBros 3D: Mass Calculate TTT\n"
+        output_message = f"RamBros 3D: TTT Mass Calculate\n"
 
         # If there is only one solid body, calculate its mass
         if num_solid_bodies == 1:
