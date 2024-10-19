@@ -41,8 +41,8 @@ def calculate_mass_of_body(body):
 def calculate_mass_with_preset_densities(bodies, is_metric):
     """Calculate total mass of bodies using preset material densities."""
     total_volumes = {
-        "Plain Carbon Steel": 0.0,
-        "Alum Alloy": 0.0,
+        "Steel": 0.0,
+        "Aluminum": 0.0,
         "ABS": 0.0
     }
 
@@ -54,8 +54,8 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
 
     output_message = ""
     materials = {
-        "Plain Carbon Steel": 7800,
-        "Alum Alloy": 2700,
+        "Steel": 7800,
+        "Aluminum": 2700,
         "ABS": 1020
     }
 
@@ -65,14 +65,14 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
             total_mass_g = total_mass_kg * 1000  # Convert kg to grams
             output_message += (
                 f"{material}:\n\n"
-                f"  {total_mass_g:.4f} g\n\n"
-                f"  {total_mass_kg:.4f} kg\n\n\n"
+                f"  {total_mass_g:.6f} g\n\n"
+                f"  {total_mass_kg:.6f} kg\n\n"
             )
         else:
             total_mass_lb = total_mass_kg * 2.20462  # Convert kg to pounds
             output_message += (
                 f"{material}:\n\n"
-                f"  {total_mass_lb:.4f} lb\n\n\n"
+                f"  {total_mass_lb:.6f} lb\n\n"
             )
     return output_message
 
@@ -101,7 +101,7 @@ def run(context):
         default_units = units_mgr.defaultLengthUnits
         is_metric = default_units in ['cm', 'mm', 'm']
 
-        output_message = f"RamBros 3D: Mass Calculate\n"
+        output_message = f"RamBros 3D: Mass Calculate TTT\n"
 
         # If there is only one solid body, calculate its mass
         if num_solid_bodies == 1:
@@ -132,13 +132,13 @@ def run(context):
                 # If a face is selected, get the parent body and calculate its mass
                 parent_body = selected_entity.body
                 if parent_body.isSolid:
-                    output_message += f"Mass of the SELECTED body (face):\n\n"
+                    output_message += f"Mass of the SELECTED body (FACE):\n\n"
                     output_message += calculate_mass_with_preset_densities([parent_body], is_metric)
                     ui.messageBox(output_message)
                     return
 
         # If no body or component selected, calculate total mass of all bodies
-        output_message += "Total Mass of All Bodies:\n\n\n"
+        output_message += "Total Mass of All Bodies:\n\n"
         output_message += calculate_mass_with_preset_densities(solid_bodies, is_metric)
 
         # If multiple bodies with different material densities, calculate from material properties
@@ -147,8 +147,13 @@ def run(context):
             unique_densities = set(densities.values())
             if len(unique_densities) > 1:
                 total_mass_kg = sum(calculate_mass_of_body(body) for body in solid_bodies)
-                output_message += f"\nTotal Mass from Material Properties:\n\n"
-                output_message += f"{total_mass_kg:.4f} kg\n"
+                if is_metric:
+                    output_message += f"\nTotal Mass from Material Properties:\n\n"
+                    output_message += f"{total_mass_kg * 1000:.6f} g\n\n"  # Convert to grams
+                    output_message += f"{total_mass_kg:.6f} kg"
+                else:
+                    output_message += f"\nTotal Mass from Material Properties:\n\n"
+                    output_message += f"{total_mass_kg * 2.20462:.6f} lb"  # Convert to pounds
 
         # Display the results
         ui.messageBox(output_message.strip())
@@ -159,6 +164,7 @@ def run(context):
 
 def stop(context):
     pass
+
 
 
 

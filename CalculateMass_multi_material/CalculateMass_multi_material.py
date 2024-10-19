@@ -44,13 +44,13 @@ def calculate_mass(total_mass_kg, is_metric):
     if is_metric:
         total_mass_g = total_mass_kg * 1000  # Convert kg to grams
         output_message += (
-            f"{total_mass_g:.4f} g\n\n"
-            f"{total_mass_kg:.4f} kg\n\n"
+            f"{total_mass_g:.6f} g\n\n"
+            f"{total_mass_kg:.6f} kg\n\n"
         )
     else:
         total_mass_lb = total_mass_kg * 2.20462  # Convert kg to pounds
         output_message += (
-            f"{total_mass_lb:.4f} lb\n\n"
+            f"{total_mass_lb:.6f} lb\n\n"
         )
 
     return output_message

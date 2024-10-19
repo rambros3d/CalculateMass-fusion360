@@ -74,14 +74,14 @@ def calculate_mass(volume_m3, materials, is_metric):
             mass_g = mass_kg * 1000  # Convert kg to grams
             output_message += (
                 f"{material}:\n\n"
-                f"  {mass_g:.4f} g\n\n"
-                f"  {mass_kg:.4f} kg\n\n\n"
+                f"  {mass_g:.6f} g\n\n"
+                f"  {mass_kg:.6f} kg\n\n\n"
             )
         else:
             mass_lb = mass_kg * 2.20462263  # Convert kg to pounds
             output_message += (
                 f"{material}:\n\n"
-                f"  {mass_lb:.4f} lb\n\n\n"
+                f"  {mass_lb:.6f} lb\n\n\n"
             )
     return output_message
 
