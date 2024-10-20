@@ -20,7 +20,7 @@
 #
 # Created and sharing this for the TooTallToby fans
 #                          &
-# Fusion 360 champions of TooTallToby's Tournaments
+# Future fusion 360 champions of TooTallToby's Tournaments
 
 import adsk.core, adsk.fusion, adsk.cam, traceback
 
