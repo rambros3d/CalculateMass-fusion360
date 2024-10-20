@@ -46,8 +46,9 @@ After winning the championship, I have **unified all the required features** alo
 ### Installation
 1. Download & unzip file [CalculateMass_ultimate.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
 2. Open Fusion 360 and open **Scripts and Add-Ins**.
-3. Navigate to **CalculateMass_ultimate** folder
-4. Add the script and run it from the **Scripts** menu.
+3. Click "+" in the **Scripts menu**
+4. Navigate and select **CalculateMass_ultimate** folder
+5. It is added, now you can run it from the **Scripts** menu.
 
 #### License
 This script is licensed under the **Public Domain**.
