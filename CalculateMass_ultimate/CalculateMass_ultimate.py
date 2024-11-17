@@ -43,7 +43,8 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
     total_volumes = {
         "Steel": 0.0,
         "Aluminum": 0.0,
-        "ABS": 0.0
+        "ABS": 0.0,
+        "Red Oak": 0.0  # Added new material
     }
 
     for body in bodies:
@@ -56,7 +57,8 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
     materials = {
         "Steel": 7800,
         "Aluminum": 2700,
-        "ABS": 1020
+        "ABS": 1020,
+        "Red Oak": 570  # Added new material
     }
 
     for material, density in materials.items():
@@ -74,6 +76,21 @@ def calculate_mass_with_preset_densities(bodies, is_metric):
                 f"{material}:\n\n"
                 f"  {total_mass_lb:.6f} lb\n\n"
             )
+    return output_message
+
+def display_mass_with_material_properties(bodies, is_metric):
+    """Display the mass of each body with its name and actual material."""
+    output_message = "Mass using actual material properties:\n\n"
+    for body in bodies:
+        body_name = body.name if body.name else "Unnamed Body"
+        material_name = body.material.name if body.material else "Unknown Material"
+        mass_kg = calculate_mass_of_body(body)
+        if is_metric:
+            mass_g = mass_kg * 1000  # Convert kg to grams
+            output_message += f"{body_name} - {material_name}\n{mass_g:.6f} g \n{mass_kg:.6f} kg\n\n"
+        else:
+            mass_lb = mass_kg * 2.20462  # Convert kg to pounds
+            output_message += f"{body_name} - {material_name}\n{mass_lb:.6f} lb\n\n"
     return output_message
 
 def run(context):
@@ -103,60 +120,68 @@ def run(context):
 
         output_message = f"RamBros 3D: TTT Mass Calculate\n"
 
-        # If there is only one solid body, calculate its mass
-        if num_solid_bodies == 1:
-            body = solid_bodies[0]
-            output_message += f"Mass of the SELECTED body:\n\n"
-            output_message += calculate_mass_with_preset_densities([body], is_metric)
-            ui.messageBox(output_message)
-            return
+        # If no body or component selected, calculate total mass of all bodies
+        selected_entities = ui.activeSelections
 
-        # If multiple bodies, check if a body, component, or face is selected
-        selected_entity = ui.activeSelections[0].entity if ui.activeSelections.count > 0 else None
+        # Handle case when one or more bodies are selected
+        if selected_entities.count > 0:
+            selected_bodies = []
+            total_mass_kg = 0.0  # Initialize total mass
+            
+            for entity in selected_entities:
+                if isinstance(entity.entity, adsk.fusion.BRepBody) and entity.entity.isSolid:
+                    if entity.entity not in selected_bodies:
+                        selected_bodies.append(entity.entity)
+                        total_mass_kg += calculate_mass_of_body(entity.entity)  # Add body mass
+                elif isinstance(entity.entity, adsk.fusion.Component):
+                    component_solid_bodies = get_all_solid_bodies(entity.entity)
+                    for body in component_solid_bodies:
+                        if body not in selected_bodies:
+                            selected_bodies.append(body)
+                            total_mass_kg += calculate_mass_of_body(body)  # Add component body mass
+                elif isinstance(entity.entity, adsk.fusion.BRepFace):
+                    parent_body = entity.entity.body
+                    if parent_body.isSolid and parent_body not in selected_bodies:
+                        selected_bodies.append(parent_body)
+                        total_mass_kg += calculate_mass_of_body(parent_body)  # Add face body mass
 
-        if selected_entity:
-            if isinstance(selected_entity, adsk.fusion.BRepBody) and selected_entity.isSolid:
-                output_message += f"Mass of the SELECTED body:\n\n"
-                output_message += calculate_mass_with_preset_densities([selected_entity], is_metric)
+            # If multiple bodies are selected
+            if len(selected_bodies) > 0:
+                output_message += "Mass of the SELECTED bodies:\n\n"
+                output_message += calculate_mass_with_preset_densities(selected_bodies, is_metric)
+                output_message += "\n" + display_mass_with_material_properties(selected_bodies, is_metric)
+                
+                # Display the total mass of the selected bodies
+                if is_metric:
+                    output_message += f"\nTotal Mass of Selected Bodies:\n\n{total_mass_kg * 1000:.6f} g\n\n{total_mass_kg:.6f} kg"
+                else:
+                    output_message += f"\nTotal Mass of Selected Bodies:\n\n{total_mass_kg * 2.20462:.6f} lb"
                 ui.messageBox(output_message)
                 return
-            elif isinstance(selected_entity, adsk.fusion.Component):
-                # If a component is selected, get its solid bodies
-                component_solid_bodies = get_all_solid_bodies(selected_entity)
-                if component_solid_bodies:
-                    output_message += f"Mass of the SELECTED component:\n\n"
-                    output_message += calculate_mass_with_preset_densities(component_solid_bodies, is_metric)
-                    ui.messageBox(output_message)
-                    return
-            elif isinstance(selected_entity, adsk.fusion.BRepFace):
-                # If a face is selected, get the parent body and calculate its mass
-                parent_body = selected_entity.body
-                if parent_body.isSolid:
-                    output_message += f"Mass of the SELECTED body (FACE):\n\n"
-                    output_message += calculate_mass_with_preset_densities([parent_body], is_metric)
-                    ui.messageBox(output_message)
-                    return
+            else:
+                ui.messageBox('Selected bodies are invalid or not solid.')
 
-        # If no body or component selected, calculate total mass of all bodies
-        output_message += "Total Mass of All Bodies:\n\n"
-        output_message += calculate_mass_with_preset_densities(solid_bodies, is_metric)
+        # If no specific selection, calculate total mass of all bodies in the design
+        else:
+            output_message += "Total Mass of All Bodies:\n\n"
+            output_message += calculate_mass_with_preset_densities(solid_bodies, is_metric)
+            output_message += "\n" + display_mass_with_material_properties(solid_bodies, is_metric)
 
-        # If multiple bodies with different material densities, calculate from material properties
-        if num_solid_bodies > 1:
-            densities = {body.material.name: body.physicalProperties.density for body in solid_bodies}
-            unique_densities = set(densities.values())
-            if len(unique_densities) > 1:
-                total_mass_kg = sum(calculate_mass_of_body(body) for body in solid_bodies)
-                if is_metric:
-                    output_message += f"\nTotal Mass from Material Properties:\n\n"
-                    output_message += f"{total_mass_kg * 1000:.6f} g\n\n"  # Convert to grams
-                    output_message += f"{total_mass_kg:.6f} kg"
-                else:
-                    output_message += f"\nTotal Mass from Material Properties:\n\n"
-                    output_message += f"{total_mass_kg * 2.20462:.6f} lb"  # Convert to pounds
+            # If multiple bodies with different material densities, calculate from material properties
+            if num_solid_bodies > 1:
+                densities = {body.material.name: body.physicalProperties.density for body in solid_bodies}
+                unique_densities = set(densities.values())
+                if len(unique_densities) > 1:
+                    total_mass_kg = sum(calculate_mass_of_body(body) for body in solid_bodies)
+                    if is_metric:
+                        output_message += f"\nTotal Mass from Material Properties:\n\n"
+                        output_message += f"{total_mass_kg * 1000:.6f} g\n\n"  # Convert to grams
+                        output_message += f"{total_mass_kg:.6f} kg"
+                    else:
+                        output_message += f"\nTotal Mass from Material Properties:\n\n"
+                        output_message += f"{total_mass_kg * 2.20462:.6f} lb"  # Convert to pounds
 
-        # Display the results
-        ui.messageBox(output_message.strip())
+            ui.messageBox(output_message.strip())
 
     except Exception as e:
         if ui:
@@ -164,7 +189,3 @@ def run(context):
 
 def stop(context):
     pass
-
-
-
-
