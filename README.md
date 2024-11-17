@@ -42,6 +42,7 @@ After winning the championship, I have **unified all the required features** alo
 - **Steel**: 7800 kg/m³
 - **Aluminum**: 2700 kg/m³
 - **ABS**: 1020 kg/m³
+- **Red Oak**: 570 kg/m³
 
 ### Installation
 1. Download & unzip file [CalculateMass_ultimate.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
