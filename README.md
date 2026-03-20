@@ -1,4 +1,35 @@
-# RamBros3D - TTT Calculate Mass
+# TTT MassCalculate Ultimate
+
+### The original script was converted into an addon by [@MischaU8](https://github.com/MischaU8/CalculateMass-fusion360)
+
+The addon is functionally identical to the script, but the UI is more intuitive and user friendly.
+
+| Unibody Design | Multimaterial Design |
+| :--- | :--- |
+|   ![screenshot-unibody](screenshots/screenshot-unibody.png) | ![screenshot-multibody](screenshots/screenshot-multibody.png) |
+
+### Installation
+1. Download & unzip file [TTT_MassCalculate_ADDON.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/latest/download/TTT_MassCalculate_ADDON.zip).
+2. Open Fusion 360 and open **Scripts and Add-Ins**.
+3. Click "+" in the **Add-Ins menu**
+4. Navigate and select **TTT_MassCalculate** folder
+5. Toggle the Addin in the **Run** coloumn.
+6. The Addin is acctivated, you can access it from the **Inspect Menu**
+
+Also Recommended: Assign a shortcut key for the Addin.
+
+### TTT Preset Densities
+| Material | Density |
+| :--- | :--- |
+| **Steel** | 7800 kg/m³ |
+| **Aluminum** | 2700 kg/m³ |
+| **ABS** | 1020 kg/m³ |
+| **American Cherry** | 570 kg/m³ |
+
+Note: **American Cherry** was previously known as **Red Oak**
+
+---
+## RamBros3D - TTT Calculate Mass
 
 ### Dedicated To TooTallToby fans & future Fusion 360 champions
 
@@ -38,19 +69,9 @@ After winning the championship, I have **unified all the required features** alo
 - **Automatic unit detection:** the script will automatically detect if the units are metric or imperial.
 - **Error Information:** If there are no solid bodies in the design, or if the body is not a solid body, the script will display an info message.
 
-### TTT Preset Densities
-- **Steel**: 7800 kg/m³
-- **Aluminum**: 2700 kg/m³
-- **ABS**: 1020 kg/m³
-- **Red Oak**: 570 kg/m³
-
-### Installation
-1. Download & unzip file [CalculateMass_ultimate.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
-2. Open Fusion 360 and open **Scripts and Add-Ins**.
-3. Click "+" in the **Scripts menu**
-4. Navigate and select **CalculateMass_ultimate** folder
-5. It is added, now you can run it from the **Scripts** menu.
-
 #### License
 This script is licensed under the **Public Domain**.
-Feel free to do whatever you want with it.
+
+#### Vibe Code Notice
+- Code is provided as is; This tool was developed with AI.
+- Take it, use it, modify it, feel free to do whatever you wish.
