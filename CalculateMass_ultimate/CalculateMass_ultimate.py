@@ -160,50 +160,54 @@ def build_mass_report_data(bodies):
 
 def add_copyable_total_row(inputs, total_mass_kg, is_metric):
     mass_number, mass_unit = format_display_mass(total_mass_kg, is_metric)
-    table = inputs.addTableCommandInput('total_table', '', 2, '4:1')
+    table = inputs.addTableCommandInput('total_table', '', 2, '4:4')
     table.hasGrid = False
+    table.isFullWidth = True
 
-    total_text = inputs.addTextBoxCommandInput(
-        'total_txt',
-        '',
-        f'Total: {mass_number} {mass_unit}',
-        1,
-        True
-    )
+    total_label = inputs.addTextBoxCommandInput('total_label', '', '<b>Total</b>', 1, True)
+    
     button_id = 'copy_total'
-    copy_btn = inputs.addBoolValueInput(button_id, 'Copy', False, '', False)
+    # Use mass string as button text
+    mass_btn = inputs.addBoolValueInput(button_id, f'{mass_number} {mass_unit}', False, '', True)
     command_state["copy_map"][button_id] = mass_number
-    table.addCommandInput(total_text, 0, 0)
-    table.addCommandInput(copy_btn, 0, 1)
+    
+    table.addCommandInput(total_label, 0, 0)
+    table.addCommandInput(mass_btn, 0, 1)
 
 def add_copyable_mass_rows(inputs, title, mass_map, prefix, is_metric):
-    inputs.addTextBoxCommandInput(
+    title_txt = inputs.addTextBoxCommandInput(
         f'{prefix}_title',
         '',
         f'<b>{title}</b>',
         1,
         True
     )
+    title_txt.isFullWidth = True
 
-    table = inputs.addTableCommandInput(f'{prefix}_table', '', 2, '4:1')
+    table = inputs.addTableCommandInput(f'{prefix}_table', '', 2, '4:4')
     table.hasGrid = False
+    table.isFullWidth = True
 
     row_index = 0
     for material, mass_kg in mass_map.items():
         mass_number, mass_unit = format_display_mass(mass_kg, is_metric)
         material_id = sanitize_id(material)
-        material_text = inputs.addTextBoxCommandInput(
-            f'{prefix}_txt_{material_id}',
+        
+        material_name = inputs.addTextBoxCommandInput(
+            f'{prefix}_name_{material_id}',
             '',
-            f'<b>{material}</b>: {mass_number} {mass_unit}',
+            f'<b>{material}</b>',
             1,
             True
         )
+        
         button_id = f'copy_{prefix}_{material_id}'
-        copy_btn = inputs.addBoolValueInput(button_id, 'Copy', False, '', False)
+        # Use mass string as button text
+        mass_btn = inputs.addBoolValueInput(button_id, f'{mass_number} {mass_unit}', False, '', True)
         command_state["copy_map"][button_id] = mass_number
-        table.addCommandInput(material_text, row_index, 0)
-        table.addCommandInput(copy_btn, row_index, 1)
+        
+        table.addCommandInput(material_name, row_index, 0)
+        table.addCommandInput(mass_btn, row_index, 1)
         row_index += 1
 
 class MassCommandExecuteHandler(adsk.core.CommandEventHandler):
@@ -264,11 +268,16 @@ class MassCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
 
             command_state["copy_map"] = {}
             inputs = cmd.commandInputs
-            inputs.addTextBoxCommandInput('scope', '', f'Scope: {scope_label}', 1, True)
+            scope_txt = inputs.addTextBoxCommandInput('scope', '', f'Scope: {scope_label}', 1, True)
+            scope_txt.isFullWidth = True
             add_copyable_total_row(inputs, total_mass_kg, is_metric)
 
             add_copyable_mass_rows(inputs, 'Preset Density Estimate', preset_totals, 'preset', is_metric)
             add_copyable_mass_rows(inputs, 'Actual Totals By Material', actual_totals, 'actual', is_metric)
+
+            # Add Tip at the bottom
+            tip_txt = inputs.addTextBoxCommandInput('tip', '', '<small>Tip: Click value to copy</small>', 1, True)
+            tip_txt.isFullWidth = True
 
         except Exception:
             if ui:
