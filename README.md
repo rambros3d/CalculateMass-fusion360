@@ -1,4 +1,11 @@
-# RamBros3D - TTT Calculate Mass
+### This script is now available as a Fusion 360 addon
+### Get it here - [MischaU8/CalculateMass-fusion360](https://github.com/rambros3d/CalculateMass-fusion360/forks)
+The addon is functionally identical to the script, but the UI is much more convenient and user friendly.
+
+> So this script has been deprecated in favor of MischaU8's fork
+
+---
+## RamBros3D - TTT Calculate Mass
 
 ### Dedicated To TooTallToby fans & future Fusion 360 champions
 
@@ -42,7 +49,7 @@ After winning the championship, I have **unified all the required features** alo
 - **Steel**: 7800 kg/m³
 - **Aluminum**: 2700 kg/m³
 - **ABS**: 1020 kg/m³
-- **Red Oak**: 570 kg/m³
+- **Red Oak**: 570 kg/m³ (now renamed to **American Cherry**)
 
 ### Installation
 1. Download & unzip file [CalculateMass_ultimate.zip](https://github.com/rambros3d/CalculateMass-fusion360/releases/download/ttt/CalculateMass_ultimate.zip).
@@ -53,4 +60,7 @@ After winning the championship, I have **unified all the required features** alo
 
 #### License
 This script is licensed under the **Public Domain**.
-Feel free to do whatever you want with it.
+
+### Vibe Code Notice
+- Code is provided as is; This tool was developed with AI.
+- Take it, use it, modify it, feel free to do whatever you wish.
