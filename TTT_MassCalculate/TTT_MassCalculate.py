@@ -33,10 +33,10 @@ import subprocess
 
 APP_NAME = 'TTT_MassCalculate'
 CMD_ID = 'MassCalculateCmd'
-CMD_NAME = 'TTT_MassCalculate'
+CMD_NAME = 'TTT MassCalculate'
 CMD_DESCRIPTION = 'Calculate mass for selected or all solid bodies.'
 WORKSPACE_ID = 'FusionSolidEnvironment'
-ICON_FOLDER = ''
+ICON_FOLDER = './.icons'
 PANEL_IDS_TO_ADD = ['SolidInspectPanel']
 
 handlers = []
