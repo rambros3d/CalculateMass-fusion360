@@ -98,8 +98,8 @@ def is_metric_document(design):
 
 def format_display_mass(mass_kg, is_metric):
     if is_metric:
-        return f"{mass_kg * 1000.0:.3f}", 'g'
-    return f"{mass_kg * 2.20462263:.3f}", 'lbs'
+        return f"{mass_kg * 1000.0:.6f}", 'g'
+    return f"{mass_kg * 2.20462263:.6f}", 'lbs'
 
 def sanitize_id(text):
     safe = ''.join(ch if ch.isalnum() else '_' for ch in text)
