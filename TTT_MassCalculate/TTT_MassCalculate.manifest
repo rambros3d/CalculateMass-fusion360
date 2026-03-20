@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "d95fcb5c-ef88-4ef9-9b9a-9d5fbeb5f307",
+  "author": "RamBros 3D",
+  "description": {
+    "": "Calculate mass for selected or all solid bodies from the Utilities ribbon."
+  },
+  "version": "3.0.0",
+  "runOnStartup": true,
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}
